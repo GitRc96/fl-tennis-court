@@ -4,15 +4,13 @@ import 'package:tennis_court_app/firebase_options.dart';
 
 import 'presentation/screens/welcome/welcome_page.dart';
 
-Future <void> main() async{
-
-  await Firebase.initializeApp(
-      options: DefaultFirebaseOptions.currentPlatform,
-  );
-
-  runApp(const TennisCourt());
-}
-
+ Future<void> main() async {
+   WidgetsFlutterBinding.ensureInitialized();
+   await Firebase.initializeApp(options: 
+   DefaultFirebaseOptions.currentPlatform);
+   runApp(const TennisCourt());
+ }
+ 
 class TennisCourt extends StatelessWidget {
   const TennisCourt({super.key});
 
