@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "668648782684",
+    "project_id": "tennis-court-84530",
+    "storage_bucket": "tennis-court-84530.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:668648782684:android:be4eeca847f21283e61f99",
+        "android_client_info": {
+          "package_name": "com.example.tennis_court_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDYOb8x_yEMPcVb2oux1JG1PVxQKleJLPo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
