@@ -7,12 +7,16 @@ class TextFieldInput extends StatelessWidget {
   final String tittleInput;
   final bool obscureText;
   final InputDecoration inputDecoration;
+  final Function onChaged;
+  final TextEditingController controller;
 
   const TextFieldInput({
     super.key,
     required this.tittleInput,
     this.obscureText = false, 
-    required this.inputDecoration,
+    required this.inputDecoration, 
+    required this.onChaged, 
+    required this.controller,
   });
 
   @override
@@ -35,7 +39,8 @@ class TextFieldInput extends StatelessWidget {
               child: Text(tittleInput, style: CustomLabels.tittleInput,),
             ),
             TextFormField(
-              onChanged: (value){},
+              controller: controller,
+              onChanged: (value) => onChaged,
               obscureText: obscureText,
               obscuringCharacter: '*',
               decoration: inputDecoration

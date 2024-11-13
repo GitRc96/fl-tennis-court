@@ -1,16 +1,29 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-import '../../widgets/shared/buttons/custom_icon_button.dart';
-import '../../widgets/shared/buttons/customs_elevated_buttons.dart';
-import '../../widgets/shared/inputs/customs_inputs.dart';
-import '../../widgets/shared/inputs/text_input_login.dart';
-import '../../widgets/shared/labes/custom_label.dart';
-import '../../widgets/shared/labes/labels_tittle_page.dart';
+import '../../../../../widgets/shared/buttons/custom_icon_button.dart';
+import '../../../../../widgets/shared/buttons/customs_elevated_buttons.dart';
+import '../../../../../widgets/shared/inputs/customs_inputs.dart';
+import '../../../../../widgets/shared/inputs/text_input_login.dart';
+import '../../../../../widgets/shared/labes/custom_label.dart';
+import '../../../../../widgets/shared/labes/labels_tittle_page.dart';
+import '../../../domain/firebase_auth_services.dart';
 import '../home/home_page.dart';
 import 'register_page.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
+
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+
+  final FirebaseAuthServices _auth = FirebaseAuthServices();
+
+  final TextEditingController _email = TextEditingController();
+  final TextEditingController _password = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -28,22 +41,30 @@ class LoginPage extends StatelessWidget {
           
           //user
           TextFieldInput(
+            controller: _email,
             tittleInput: 'Email',
             inputDecoration: CustomInputs.loginInputDecoration(
               hintInput: 'Ingrese su email',
               iconInput: Icons.email_outlined,
             ),
+            onChaged: (value) {
+              _email.text = value;
+            },
           ),
           const SizedBox(height: 40,),
 
           //Password
           TextFieldInput(
+            controller: _password,
             tittleInput: 'Contraseña',
             obscureText: true,
             inputDecoration: CustomInputs.passwordInputDecoration(
               hintInput: 'Ingrese su contraseña',
               iconInput: Icons.lock_outline,
             ),
+            onChaged: (value) {
+              _password.text = value;
+            },
           ),
 
           //Remember
@@ -60,10 +81,7 @@ class LoginPage extends StatelessWidget {
               width: 311,
               heigth: 53,
               text: 'Iniciar sesión',
-              onPressed: () => Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (BuildContext context) => const HomePage())),
+              onPressed: () => _singIn()
             ),
           ),
           const SizedBox(height: 60,),
@@ -74,6 +92,25 @@ class LoginPage extends StatelessWidget {
       ),
     );
   }
+
+  void _singIn() async {
+    String email = _email.text;
+    String password = _password.text;
+
+    User? user = await _auth.singIn(email, password);
+
+    if (user != null) {
+      print('Usuario logeado!');
+      Navigator.push(
+        context, 
+        MaterialPageRoute(
+          builder: (BuildContext context) => const HomePage()));
+    } else {
+      print('Error al logear usuario');
+    }
+
+  }
+
 }
 
 class _LinkSingUp extends StatelessWidget {

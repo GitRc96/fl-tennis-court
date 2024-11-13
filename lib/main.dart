@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:tennis_court_app/firebase_options.dart';
 
-import 'presentation/screens/welcome/welcome_page.dart';
+import 'features/auth/presentation/screens/welcome/welcome_page.dart';
 
  Future<void> main() async {
    WidgetsFlutterBinding.ensureInitialized();

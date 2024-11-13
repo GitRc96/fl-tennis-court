@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../../widgets/shared/buttons/customs_elevated_buttons.dart';
-import '../../widgets/welcome/background_image.dart';
-import '../../widgets/welcome/logo.dart';
+import '../../../../../widgets/shared/buttons/customs_elevated_buttons.dart';
+import '../../../../../widgets/welcome/background_image.dart';
+import '../../../../../widgets/welcome/logo.dart';
 import '../login/login_page.dart';
 import '../login/register_page.dart';
 

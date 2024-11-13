@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import '../../widgets/home/cards_court.dart';
-import '../../widgets/home/list_reservation.dart';
-import '../../widgets/shared/appbar/custom_appbar.dart';
-import '../../widgets/shared/navigationbar/custom_navigationbar.dart';
+import '../../../../../widgets/home/cards_court.dart';
+import '../../../../../widgets/home/list_reservation.dart';
+import '../../../../../widgets/shared/appbar/custom_appbar.dart';
+import '../../../../../widgets/shared/navigationbar/custom_navigationbar.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
