@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../widgets/home/cards_court.dart';
@@ -10,6 +11,9 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    final _user = FirebaseAuth.instance.currentUser; 
+
     return Scaffold(
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -20,21 +24,21 @@ class HomePage extends StatelessWidget {
           Expanded(
             child: ListView(
               padding: const EdgeInsets.all(0),
-              children: const [
+              children: [
                 //Greeting
                 Padding(
-                  padding: EdgeInsets.only(left: 20, top: 15),
+                  padding: const EdgeInsets.only(left: 20, top: 15),
                   child: Text(
-                    'Hola Andrea!',
-                    style:  TextStyle(
+                    'Hola ${_user?.email ?? 'Andreina'}!',
+                    style:  const TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.w700
                     ),),
                 ),
-                Divider(),
+                const Divider(),
             
                 //Section 1
-                Padding(
+                const Padding(
                   padding: EdgeInsets.only(left: 20, top: 10, bottom: 10),
                   child: Text(
                     'Canchas',
@@ -42,11 +46,11 @@ class HomePage extends StatelessWidget {
                       fontSize: 18,
                     ),),
                 ),
-                _ListCardsCourt(),
-                Divider(),
+                const _ListCardsCourt(),
+                const Divider(),
                 
                 //Section 2
-                Padding(
+                const Padding(
                   padding: EdgeInsets.only(left: 20, top: 10, bottom: 5),
                   child: Text(
                     'Reservas programadas',
@@ -55,14 +59,14 @@ class HomePage extends StatelessWidget {
                       fontWeight: FontWeight.w600
                     ),),
                 ),
-                ListReservation(
+                const ListReservation(
                   pathIamge: 'assets/image/cancha2.png',
                   nameCourt:'Sport Box',
                   date:'6 de Julio 2024',
                   hours:'2',
                   price:'50'
                 ),
-                ListReservation(
+                const ListReservation(
                   pathIamge: 'assets/image/cancha3.png',
                   nameCourt:'Cancha multiple',
                   date:'29 de Agosto 2024',

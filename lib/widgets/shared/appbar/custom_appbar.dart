@@ -1,10 +1,16 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-class CustomAppBar extends StatelessWidget {
+class CustomAppBar extends StatefulWidget {
   const CustomAppBar({
     super.key,
   });
 
+  @override
+  State<CustomAppBar> createState() => _CustomAppBarState();
+}
+
+class _CustomAppBarState extends State<CustomAppBar> {
   @override
   Widget build(BuildContext context) {
     const boxDecoration = BoxDecoration(
@@ -30,13 +36,7 @@ class CustomAppBar extends StatelessWidget {
             Expanded(child: Container()),
 
             //CircleAvatar
-            SizedBox(
-              height: 24,
-              width: 24,
-              child: CircleAvatar(
-                child: Image.asset('assets/image/avatar.png'),
-              ),
-            ),
+            const _CircleAvatar(),
             const SizedBox(width: 10,),
 
             //Notification button
@@ -59,6 +59,59 @@ class CustomAppBar extends StatelessWidget {
             ),
 
           ],
+        ),
+      ),
+    );
+  }
+}
+
+class _CircleAvatar extends StatefulWidget {
+  const _CircleAvatar();
+
+  @override
+  State<_CircleAvatar> createState() => _CircleAvatarState();
+}
+
+class _CircleAvatarState extends State<_CircleAvatar> {
+
+    final GlobalKey _circleAvatarKey = GlobalKey();
+
+  void _openPopupMenu() {
+    RenderBox renderBox = _circleAvatarKey.currentContext!.findRenderObject() as RenderBox;
+    Offset offset = renderBox.localToGlobal(Offset.zero);
+
+    showMenu(
+      context: context,
+      position: RelativeRect.fromLTRB(offset.dx, offset.dy + renderBox.size.height, offset.dx + renderBox.size.width, offset.dy),
+      items: [
+        const PopupMenuItem<int>(
+          value: 1,
+          child: Text('Perfil'),
+        ),
+        const PopupMenuItem<int>(
+          value: 2,
+          child: Text('Salir'),
+        ),
+      ],
+    ).then((value) {
+      if (value == 2) {
+        FirebaseAuth.instance.signOut();
+        Navigator.pushNamed(context, '/');
+      }
+    });
+    
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 24,
+      width: 24,
+      child: InkWell(
+        key: _circleAvatarKey,
+        onTap: _openPopupMenu,
+        child: CircleAvatar(
+          child: Image.asset('assets/image/avatar.png'),
         ),
       ),
     );

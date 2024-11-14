@@ -1,8 +1,12 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:tennis_court_app/firebase_options.dart';
 
+import 'features/auth/presentation/screens/home/home_page.dart';
+import 'features/auth/presentation/screens/login/login_page.dart';
 import 'features/auth/presentation/screens/welcome/welcome_page.dart';
+
 
  Future<void> main() async {
    WidgetsFlutterBinding.ensureInitialized();
@@ -11,15 +15,43 @@ import 'features/auth/presentation/screens/welcome/welcome_page.dart';
    runApp(const TennisCourt());
  }
  
-class TennisCourt extends StatelessWidget {
+class TennisCourt extends StatefulWidget {
   const TennisCourt({super.key});
 
   @override
+  State<TennisCourt> createState() => _TennisCourtState();
+}
+
+class _TennisCourtState extends State<TennisCourt> {
+
+  String _rootPage = '/'; 
+
+  void  getRootPage() async =>
+    FirebaseAuth.instance.currentUser == null
+      ? setState(() {
+       _rootPage = '/'; 
+      }) 
+      : setState(() {
+       _rootPage = '/home'; 
+      }) ;
+
+  @override
+  void initState() {
+    super.initState();
+    getRootPage();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       title: 'Tennis Court',
       debugShowCheckedModeBanner: false,
-      home: WelcomePage(),
+      initialRoute: _rootPage,
+      routes: {
+        '/': (context) => const WelcomePage(),
+        '/login': (context) => const LoginPage(),
+        '/home': (context) => const HomePage(),
+      },
     );
   }
 }
