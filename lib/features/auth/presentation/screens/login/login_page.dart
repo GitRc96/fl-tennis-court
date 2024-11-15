@@ -1,14 +1,15 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../../widgets/shared/buttons/custom_icon_button.dart';
-import '../../../../../widgets/shared/buttons/customs_elevated_buttons.dart';
-import '../../../../../widgets/shared/inputs/customs_inputs.dart';
-import '../../../../../widgets/shared/inputs/text_input_login.dart';
-import '../../../../../widgets/shared/labes/custom_label.dart';
-import '../../../../../widgets/shared/labes/labels_tittle_page.dart';
+import '../../../../widgets/auth/header.dart';
+import '../../../../widgets/shared/buttons/customs_elevated_buttons.dart';
+import '../../../../widgets/shared/inputs/customs_inputs.dart';
+import '../../../../widgets/shared/inputs/text_input_login.dart';
+import '../../../../widgets/shared/labes/custom_label.dart';
+import '../../../../widgets/shared/labes/labels_tittle_page.dart';
 import '../../../domain/firebase_auth_services.dart';
-import '../home/home_page.dart';
+import '../../../../widgets/shared/snack_bar.dart';
+import '../../../../home/presentation/screen/home/home_page.dart';
 import 'register_page.dart';
 
 class LoginPage extends StatefulWidget {
@@ -34,7 +35,7 @@ class _LoginPageState extends State<LoginPage> {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           //Header
-          const _Header(),
+          const Header(),
 
           //Tittle Page
           const TittlePage(text: 'Iniciar sesión ',),
@@ -99,18 +100,19 @@ class _LoginPageState extends State<LoginPage> {
 
     User? user = await _auth.singIn(email, password);
 
+    await Future.delayed(const Duration(seconds: 2));
+    
+    if (!mounted) return;
+
     if (user != null) {
-      print('Usuario logeado!');
       Navigator.push(
         context, 
         MaterialPageRoute(
           builder: (BuildContext context) => const HomePage()));
     } else {
-      print('Error al logear usuario');
+      CustomSnackBar(context: context).snackBar('Usuario o contraseña invalida!');
     }
-
   }
-
 }
 
 class _LinkSingUp extends StatelessWidget {
@@ -173,23 +175,6 @@ class _RememberPass extends StatelessWidget {
           const Text('Recordar contraseña')
         ],
       ),
-    );
-  }
-}
-
-class _Header extends StatelessWidget {
-  const _Header();
-
-  @override
-  Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Image.asset('assets/image/header.png'),
-        const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 30, vertical: 50),
-          child: CustomIconButton() 
-        ),
-      ],
     );
   }
 }

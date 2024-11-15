@@ -3,9 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:tennis_court_app/firebase_options.dart';
 
-import 'features/auth/presentation/screens/home/home_page.dart';
+import 'features/home/presentation/screen/home/home_page.dart';
 import 'features/auth/presentation/screens/login/login_page.dart';
 import 'features/auth/presentation/screens/welcome/welcome_page.dart';
+import 'features/reserve/presentation/screens/reserve_page.dart';
 
 
  Future<void> main() async {
@@ -46,11 +47,13 @@ class _TennisCourtState extends State<TennisCourt> {
     return MaterialApp(
       title: 'Tennis Court',
       debugShowCheckedModeBanner: false,
+      // initialRoute: _rootPage,
       initialRoute: _rootPage,
       routes: {
         '/': (context) => const WelcomePage(),
         '/login': (context) => const LoginPage(),
         '/home': (context) => const HomePage(),
+        '/reserve': (context) => const ReservePage()
       },
     );
   }

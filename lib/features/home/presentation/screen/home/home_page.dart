@@ -1,10 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../../widgets/home/cards_court.dart';
-import '../../../../../widgets/home/list_reservation.dart';
-import '../../../../../widgets/shared/appbar/custom_appbar.dart';
-import '../../../../../widgets/shared/navigationbar/custom_navigationbar.dart';
+import '../../../../widgets/home/cards_court.dart';
+import '../../../../widgets/home/list_reservation.dart';
+import '../../../../widgets/shared/appbar/custom_appbar.dart';
+import '../../../../widgets/shared/navigationbar/custom_navigationbar.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -12,7 +12,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    final _user = FirebaseAuth.instance.currentUser; 
+    final user = FirebaseAuth.instance.currentUser; 
 
     return Scaffold(
       body: Column(
@@ -29,7 +29,7 @@ class HomePage extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(left: 20, top: 15),
                   child: Text(
-                    'Hola ${_user?.email ?? 'Andreina'}!',
+                    'Hola ${user?.email ?? 'Andreina'}!',
                     style:  const TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.w700

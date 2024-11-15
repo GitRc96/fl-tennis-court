@@ -10,10 +10,8 @@ class FirebaseAuthServices {
       UserCredential credential = await _auth.createUserWithEmailAndPassword(email: email, password: password);
       return credential.user;
     } catch (e) {
-      print('Error al crear usuario');
+      return null;
     }
-
-    return null;
 
   }
 
@@ -23,10 +21,8 @@ class FirebaseAuthServices {
       UserCredential credential = await _auth.signInWithEmailAndPassword(email: email, password: password);
       return credential.user;
     } catch (e) {
-      print('Error al crear usuario');
+      return null;
     }
-
-    return null;
 
   }
 
