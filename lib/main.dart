@@ -48,7 +48,7 @@ class _TennisCourtState extends State<TennisCourt> {
       title: 'Tennis Court',
       debugShowCheckedModeBanner: false,
       // initialRoute: _rootPage,
-      initialRoute: _rootPage,
+      initialRoute: '/reserve',
       routes: {
         '/': (context) => const WelcomePage(),
         '/login': (context) => const LoginPage(),
